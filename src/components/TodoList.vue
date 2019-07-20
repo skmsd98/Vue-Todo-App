@@ -1,24 +1,32 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="(todo,index) in todos" :key="index">
-        <input
-          type="checkbox"
-          name="checkbox"
-          id="checkbox"
-          v-on:click="checkClicked(todo)"
-          v-bind:checked="todo.done"
-        />
-        <del v-if="todo.done">{{todo.text}}</del>
-        <span v-else>{{todo.text}}</span>
-        <span v-on:click="editClicked(todo.id)">
-          <button>Edit</button>
-        </span>
-        <span v-on:click="deleteClicked(todo.id)">
-          <button>Delete</button>
-        </span>
-      </li>
-    </ul>
+  <div class="table-responsive">
+    <table class="table">
+      <tr v-for="(todo,index) in todos" :key="index">
+        <td>
+          <input
+            type="checkbox"
+            name="checkbox"
+            id="checkbox"
+            v-on:click="checkClicked(todo)"
+            v-bind:checked="todo.done"
+          />
+        </td>
+        <td>
+          <del v-if="todo.done">{{todo.text}}</del>
+          <span v-else>{{todo.text}}</span>
+        </td>
+        <td>
+          <span v-on:click="editClicked(todo.id)">
+            <button class="btn btn-success">Edit</button>
+          </span>
+        </td>
+        <td>
+          <span v-on:click="deleteClicked(todo.id)">
+            <button class="btn btn-danger">Delete</button>
+          </span>
+        </td>
+      </tr>
+    </table>
   </div>
 </template>
 

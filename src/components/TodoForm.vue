@@ -1,8 +1,10 @@
 <template>
   <div>
     <form @submit.prevent="submitTodo">
-      <input type="text" name="text" ref="text" id="textField" v-model="text" />
-      <button type="submit">Add Todo</button>
+      <div class="form-group row">
+        <input class="form-control-plaintext col-lg-12 " placeholder="Todo Text..." type="text" name="text" ref="text" id="textField" v-model="text" />
+        <button class="btn btn-primary col-lg-12" type="submit">Add Todo</button>
+      </div>
     </form>
   </div>
 </template>

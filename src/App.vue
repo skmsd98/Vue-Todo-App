@@ -1,6 +1,10 @@
 <template>
-  <div id="app">
-    <h1>Todo App</h1>
+  <div id="app" class="container">
+    <div class="row">
+      <div class="col text-center">
+        <h1>Todo App</h1>
+      </div>
+    </div>
     <TodoForm @todoCreated="addTodo" />
     <TodoList
       :todos="todos"
@@ -34,7 +38,11 @@ export default {
         const editVal = this.todos.filter(todo => todo.isEdit == true)[0];
         const index = this.todos.indexOf(editVal);
         if (text.trim() && !match.length) {
-          this.todos[index] = { text: text, done: this.todos[index]['done'], id: Date.now() };
+          this.todos[index] = {
+            text: text,
+            done: this.todos[index]["done"],
+            id: Date.now()
+          };
           this.todos.push();
         }
       } else {
@@ -67,12 +75,12 @@ export default {
 </script>
 
 <style>
-#app {
+/* #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
+} */
 </style>
