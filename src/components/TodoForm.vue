@@ -1,8 +1,16 @@
 <template>
   <div>
-    <form @submit.prevent="submitTodo">
+    <form @submit.prevent="addTodo(text)">
       <div class="form-group row">
-        <input class="form-control-plaintext col-lg-12 " placeholder="Todo Text..." type="text" name="text" ref="text" id="textField" v-model="text" />
+        <input
+          class="form-control-plaintext col-lg-12"
+          placeholder="Todo Text..."
+          type="text"
+          name="text"
+          ref="text"
+          id="textField"
+          v-model="text"
+        />
         <button class="btn btn-primary col-lg-12" type="submit">Add Todo</button>
       </div>
     </form>
@@ -18,9 +26,33 @@ export default {
     };
   },
   methods: {
-    submitTodo(e) {
-      this.$emit("todoCreated", this.text);
-      e.target.elements.text.value = "";
+    addTodo(text) {
+      let todos = this.$store.state.todos;
+      const exits = todos.filter(todo => todo.isEdit == true);
+      const match = todos.filter(todo => todo["text"] == text);
+      if (exits.length) {
+        const editVal = todos.filter(todo => todo.isEdit == true)[0];
+        const index = todos.indexOf(editVal);
+        if (text.trim() && !match.length) {
+          todos[index] = {
+            text,
+            done: todos[index]["done"],
+            id: Date.now()
+          };
+          this.$store.commit("updateTodo", { index: index, text: text });
+        }
+      } else {
+        if (!match.length) {
+          text.trim() &&
+            this.$store.commit("addTodo", {
+              text,
+              done: false,
+              id: Date.now(),
+              isEdit: false
+            });
+        }
+      }
+      this.text = "";
     }
   }
 };

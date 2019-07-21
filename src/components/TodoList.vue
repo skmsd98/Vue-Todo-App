@@ -7,8 +7,8 @@
             type="checkbox"
             name="checkbox"
             id="checkbox"
-            v-on:click="checkClicked(todo)"
-            v-bind:checked="todo.done"
+            v-on:click="toggleDone(todo)"
+            v-model="todo.done"
           />
         </td>
         <td>
@@ -16,12 +16,12 @@
           <span v-else>{{todo.text}}</span>
         </td>
         <td>
-          <span v-on:click="editClicked(todo.id)">
+          <span v-on:click="editTodo(todo.id)">
             <button class="btn btn-success">Edit</button>
           </span>
         </td>
         <td>
-          <span v-on:click="deleteClicked(todo.id)">
+          <span v-on:click="deleteTodo(todo.id)">
             <button class="btn btn-danger">Delete</button>
           </span>
         </td>
@@ -37,14 +37,20 @@ export default {
     todos: Array
   },
   methods: {
-    checkClicked(todo) {
-      this.$emit("checkToggle", todo);
+    editTodo(id) {
+      let todos = this.$store.state.todos;
+      const index = todos.findIndex(todo => todo.id == id);
+      console.log("func", index);
+      this.$store.commit("editTodo", index);
+      document.getElementById("textField").value = todos[index]["text"];
+      document.getElementById("textField").focus();
     },
-    editClicked(id) {
-      this.$emit("clickedEdit", id);
+    deleteTodo(id) {
+      this.$store.commit("deleteTodo", id);
     },
-    deleteClicked(id) {
-      this.$emit("clickedDelete", id);
+    toggleDone(todo) {
+      let index = state.todos.indexOf(todo.text);
+      this.$store.commit("toggleDone", index);
     }
   }
 };
