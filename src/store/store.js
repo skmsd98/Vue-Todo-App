@@ -9,12 +9,10 @@ export default new Vuex.Store({
     },
     mutations: {
         addTodo(state, todo) {
-            state.todos.push(todo);
-            console.log(state);
+            state.todos.push(todo)
         },
         editTodo(state, index) {
             state.todos[index]['isEdit'] = true;
-            console.log(state.todos)
         },
         updateTodo(state, payload) {
             const index = payload['index'];

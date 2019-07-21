@@ -40,7 +40,6 @@ export default {
     editTodo(id) {
       let todos = this.$store.state.todos;
       const index = todos.findIndex(todo => todo.id == id);
-      console.log("func", index);
       this.$store.commit("editTodo", index);
       document.getElementById("textField").value = todos[index]["text"];
       document.getElementById("textField").focus();
