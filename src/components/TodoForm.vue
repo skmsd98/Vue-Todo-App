@@ -35,11 +35,10 @@ export default {
         const index = todos.indexOf(editVal);
         if (text.trim() && !match.length) {
           todos[index] = {
-            text,
-            done: todos[index]["done"],
-            id: Date.now()
+            ...todos[index],
+            text
           };
-          this.$store.commit("updateTodo", { index: index, text: text });
+          this.$store.commit("updateTodo", todos[index]);
         }
       } else {
         if (!match.length) {

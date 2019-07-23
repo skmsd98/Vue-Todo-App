@@ -24,6 +24,9 @@ export default {
     getTodos() {
       return this.$store.state.todos;
     }
+  },
+  created() {
+    this.$store.commit("getTodosFirebase");
   }
 };
 </script>

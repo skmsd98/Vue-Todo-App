@@ -21,7 +21,7 @@
           </span>
         </td>
         <td>
-          <span v-on:click="deleteTodo(todo.id)">
+          <span v-on:click="deleteTodo(todo.key)">
             <button class="btn btn-danger">Delete</button>
           </span>
         </td>
@@ -44,12 +44,11 @@ export default {
       document.getElementById("textField").value = todos[index]["text"];
       document.getElementById("textField").focus();
     },
-    deleteTodo(id) {
-      this.$store.commit("deleteTodo", id);
+    deleteTodo(key) {
+      this.$store.commit("deleteTodo", key);
     },
     toggleDone(todo) {
-      let index = state.todos.indexOf(todo.text);
-      this.$store.commit("toggleDone", index);
+      this.$store.commit("toggleDone", todo);
     }
   }
 };
